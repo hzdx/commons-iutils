@@ -27,9 +27,14 @@ public abstract class WaitWorkThread implements Runnable {
 			try {
 				handler(data);
 			} catch (Throwable e) {
-				System.err.println(e.toString());
+				handerException(e);
+				
 			}
 		}
+	}
+
+	protected void handerException(Throwable e) {
+		e.printStackTrace(System.err);
 	}
 
 	private Object waitData() {

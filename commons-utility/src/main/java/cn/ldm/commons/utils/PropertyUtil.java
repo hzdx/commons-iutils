@@ -35,7 +35,7 @@ public class PropertyUtil {
 			throw new IllegalArgumentException("properties is null or empty!");
 		}
 
-		Map<String, String> map = new HashMap<>();
+		Map<String,String> map = new HashMap<>();
 		Enumeration<?> en = p.propertyNames();
 		while (en.hasMoreElements()) {
 			String key = (String) en.nextElement();

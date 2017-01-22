@@ -9,14 +9,26 @@ public class ThreadUtil {
 
 	public static void scheduleSingle(final String threadName, Runnable cmd, long initialDelay, long period,
 			TimeUnit unit) {
-		ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor(new ThreadFactory() {
-			public Thread newThread(Runnable runnable) {
-				Thread thread = new Thread(runnable, threadName);
-				thread.setDaemon(true);
-				return thread;
-			}
-		});
+		ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor(FixNameThreadFactory.name(threadName));
 		scheduler.scheduleAtFixedRate(cmd, initialDelay, period, unit);
 	}
 
+	public static class FixNameThreadFactory implements ThreadFactory {
+		String threadName;
+
+		@Override
+		public Thread newThread(Runnable r) {
+			Thread thread = new Thread(r, threadName);
+			thread.setDaemon(true);
+			return thread;
+		}
+
+		public FixNameThreadFactory(String threadName) {
+			this.threadName = threadName;
+		}
+
+		public static FixNameThreadFactory name(String threadName) {
+			return new FixNameThreadFactory(threadName);
+		}
+	}
 }
