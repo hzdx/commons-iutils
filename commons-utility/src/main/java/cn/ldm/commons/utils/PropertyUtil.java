@@ -6,6 +6,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 public class PropertyUtil {
 
@@ -30,17 +31,15 @@ public class PropertyUtil {
 		return p;
 	}
 
-	public static Map<String, String> property2Map(Properties p) {
+	public static Map<String, String> propertyToMap(Properties p) {
 		if (p == null || p.size() < 1) {
 			throw new IllegalArgumentException("properties is null or empty!");
 		}
 
 		Map<String,String> map = new HashMap<>();
-		Enumeration<?> en = p.propertyNames();
-		while (en.hasMoreElements()) {
-			String key = (String) en.nextElement();
-			String value = p.getProperty(key);
-			map.put(key, value);
+		Set<String> keys = p.stringPropertyNames();
+		for(String key : keys){
+			map.put(key, p.getProperty(key));
 		}
 
 		return map;

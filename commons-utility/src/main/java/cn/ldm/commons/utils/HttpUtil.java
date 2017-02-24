@@ -10,11 +10,14 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
+import cn.ldm.commons.Constants;
+
 public class HttpUtil {
 	private static final String METHOD_GET = "GET";
 	private static final String METHOD_POST = "POST";
-	private static final String LINE_SEPARATOR = System.getProperty("line.separator", "\n");
-
+	
+	private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36";
+	
 	public static String get(String url, Map<String, String> requestHead) throws IOException {
 		BufferedReader in = null;
 		HttpURLConnection conn = null;
@@ -23,6 +26,7 @@ public class HttpUtil {
 			conn = (HttpURLConnection) realUrl.openConnection();
 			conn.setRequestMethod(METHOD_GET);
 
+			conn.setRequestProperty("User-Agent",USER_AGENT);
 			if (requestHead != null && requestHead.size() > 0) {
 				for (Entry<String, String> en : requestHead.entrySet()) {
 					conn.setRequestProperty(en.getKey(), en.getValue());
@@ -31,8 +35,9 @@ public class HttpUtil {
 			conn.setUseCaches(false);
 			conn.setDoOutput(false);
 
-			in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
-			return read(in);
+			in = new BufferedReader(new InputStreamReader(conn.getInputStream(),Constants.UTF8));
+			String response = read(in);
+			return response;
 		} catch (IOException e) {
 			throw e;
 		} finally {
@@ -60,6 +65,8 @@ public class HttpUtil {
 			URL realUrl = new URL(url);
 			conn = (HttpURLConnection) realUrl.openConnection();
 			conn.setRequestMethod(METHOD_POST);
+			
+			conn.setRequestProperty("User-Agent",USER_AGENT);
 			if (requestHead != null && requestHead.size() > 0) {
 				for (Entry<String, String> en : requestHead.entrySet()) {
 					conn.setRequestProperty(en.getKey(), en.getValue());
@@ -68,14 +75,15 @@ public class HttpUtil {
 			conn.setUseCaches(false);
 			conn.setDoOutput(true);
 
-			if (Strings.NotEmpty(requestBody)) {
+			if (Assert.NotEmpty(requestBody)) {
 				out = new PrintWriter(conn.getOutputStream());
 				out.print(requestBody);
 				out.flush();
 			}
-
+			
 			in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			return read(in);
+			String response = read(in);
+			return response;
 		} catch (IOException e) {
 			throw e;
 		} finally {
@@ -95,7 +103,7 @@ public class HttpUtil {
 		StringBuilder sb = new StringBuilder();
 		String s = null;
 		while ((s = reader.readLine()) != null) {
-			sb.append(s + LINE_SEPARATOR);
+			sb.append(s + Constants.LINE_SEPARATOR);
 		}
 		return sb.toString();
 	}

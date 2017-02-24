@@ -4,6 +4,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+//使用Lock,Condition实现
 public abstract class WaitWorkThread implements Runnable {
 	private boolean isOccupied = false;
 	private Object data;
@@ -20,22 +21,24 @@ public abstract class WaitWorkThread implements Runnable {
 	}
 
 	public abstract void handler(Object data);
+	
 
+	protected void handerException(Throwable e) {
+		e.printStackTrace(System.err);
+	}
+
+	@Override
 	public void run() {
 		while (true) {
 			Object data = waitData();
 			try {
 				handler(data);
 			} catch (Throwable e) {
-				handerException(e);
-				
+				handerException(e);	
 			}
 		}
 	}
 
-	protected void handerException(Throwable e) {
-		e.printStackTrace(System.err);
-	}
 
 	private Object waitData() {
 		lock.lock();
@@ -54,17 +57,6 @@ public abstract class WaitWorkThread implements Runnable {
 		} finally {
 			lock.unlock();
 		}
-		//
-		// while (!available) {
-		// try {
-		// wait();
-		// } catch (InterruptedException e) {
-		// }
-		// }
-		// Object getData = data;
-		// available = false;
-		// notifyAll();
-		// return getData;
 	}
 
 	public void delivery(Object ndata) {
@@ -84,15 +76,6 @@ public abstract class WaitWorkThread implements Runnable {
 			lock.unlock();
 		}
 
-		// while (available) {
-		// try {
-		// wait();
-		// } catch (InterruptedException e) {
-		// }
-		// }
-		// data = ndata;
-		// available = true;
-		// notifyAll();
 	}
 
 	public String getThreadName() {
