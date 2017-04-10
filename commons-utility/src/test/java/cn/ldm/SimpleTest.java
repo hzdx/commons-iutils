@@ -29,7 +29,7 @@ public class SimpleTest {
 
 	@Test
 	public void testHttpGet() throws IOException {
-		String s = HttpUtil.get("http://localhost:8081/aaa/bb", null);
+		String s = HttpUtil.get("http://10.222.20.134:8084/...", null);
 		System.out.println(s);
 	}
 

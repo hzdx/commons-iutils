@@ -48,9 +48,10 @@ public class TcpServer {
 		try {
 			InputStream in = socket.getInputStream();
 			
-			System.out.println(Thread.currentThread().getName() +" availble "+in.available());
+			//System.out.println(Thread.currentThread().getName() +" availble "+in.available());
 
-			System.out.print(Thread.currentThread().getName() + new String(readBytes(in)));
+			System.out.print(Thread.currentThread().getName()+":\r\n" + new String(readBytes(in)));
+			//System.out.print(Thread.currentThread().getName()+":\r\n" + new String(readBytes(in)));
 
 			OutputStream out = socket.getOutputStream();
 			out.write(RESPONSE_STR.getBytes(StandardCharsets.UTF_8));
