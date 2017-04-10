@@ -5,7 +5,7 @@ public class GitTest {
 
 	public static void main(String[] args) {
 		
-		System.out.println("one line");	
+		System.out.println("hello world!");	
 		System.out.println("send line");
 	
 		
