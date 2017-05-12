@@ -7,8 +7,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Arrays;
 
-import cn.ldm.commons.Constants;
-
 public class IOUtil {
 
 	public static void closeStream(Closeable stream) {

@@ -1,4 +1,4 @@
-package cn.ldm.commons.net;
+package cn.ldm.commons.utils.net;
 
 import java.io.IOException;
 import java.io.InputStream;

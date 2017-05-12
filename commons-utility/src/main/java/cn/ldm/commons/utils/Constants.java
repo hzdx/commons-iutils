@@ -1,4 +1,4 @@
-package cn.ldm.commons;
+package cn.ldm.commons.utils;
 
 public class Constants {
 	public static final String UTF8 = "UTF-8";

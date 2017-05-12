@@ -1,4 +1,4 @@
-package cn.ldm.commons.utils;
+package cn.ldm.commons.utils.concurrent;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;

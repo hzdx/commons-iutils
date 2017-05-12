@@ -1,4 +1,4 @@
-package cn.ldm.commons.json;
+package cn.ldm.commons.utils.json;
 
 //对jsonp的支持-jsonp包装对象
 public class JsonpObject {

@@ -26,7 +26,7 @@ public class ByteUtil {
 	}
 
 	// 0~15 -1
-	public static int hexToNum(char c) throws IllegalArgumentException {
+	public static int hexToNum(char c) {
 		if (c >= '0' && c <= '9')
 			return c - '0';
 		else if (c >= 'a' && c <= 'f')
@@ -36,7 +36,7 @@ public class ByteUtil {
 		throw new IllegalArgumentException("不合法的16进制字符:" + c);
 	}
 
-	public static byte[] hexStrToBytes(String hexStr) throws IllegalArgumentException {
+	public static byte[] hexStrToBytes(String hexStr) {
 		if (hexStr == null || hexStr.trim().length() == 0)
 			return null;
 		if (hexStr.startsWith("0x"))

@@ -3,12 +3,14 @@ package cn.ldm;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import org.junit.Test;
 
 import cn.ldm.commons.utils.FileUtil;
-import cn.ldm.commons.utils.HttpUtil;
 import cn.ldm.commons.utils.IOUtil;
+import cn.ldm.commons.utils.net.http.HttpUtil;
 
 public class SimpleTest {
 	@Test
@@ -55,6 +57,16 @@ public class SimpleTest {
 		String s2 = FileUtil.read("d:/c.txt");
 //		System.out.println(s2.length());
 		System.out.println(s2);
+	}
+	
+	@Test
+	public void testUrl() throws MalformedURLException{
+		 String path =
+				 "ftp://asdf:aa@#$@10.221.247.27:2342/q/a/b/bb/c";
+		 
+		 URL url = new URL(path);
+		 
+		 System.out.println(url.getHost() + ".." + url.getPath());
 	}
 
 }

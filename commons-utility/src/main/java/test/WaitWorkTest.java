@@ -2,7 +2,7 @@ package test;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import cn.ldm.commons.etc.WaitWorkThread;
+import cn.ldm.commons.utils.concurrent.WaitWorkThread;
 
 public class WaitWorkTest extends WaitWorkThread{
 

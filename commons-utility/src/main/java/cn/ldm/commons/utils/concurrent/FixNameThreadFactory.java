@@ -1,4 +1,4 @@
-package cn.ldm.commons.etc;
+package cn.ldm.commons.utils.concurrent;
 
 import java.util.concurrent.ThreadFactory;
 

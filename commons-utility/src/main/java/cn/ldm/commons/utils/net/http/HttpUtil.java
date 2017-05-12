@@ -1,4 +1,4 @@
-package cn.ldm.commons.utils;
+package cn.ldm.commons.utils.net.http;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,25 +8,28 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import cn.ldm.commons.utils.Constants;
+
 import java.util.TreeMap;
 
-import cn.ldm.commons.Constants;
-
 public class HttpUtil {
-	private static final String METHOD_GET = "GET";
-	private static final String METHOD_POST = "POST";
-	
+
 	private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36";
-	
+
+	public static String get(String url) throws IOException {
+		return get(url, null);
+	}
+
 	public static String get(String url, Map<String, String> requestHead) throws IOException {
-		BufferedReader in = null;
+		BufferedReader reader = null;
 		HttpURLConnection conn = null;
 		try {
 			URL realUrl = new URL(url);
 			conn = (HttpURLConnection) realUrl.openConnection();
-			conn.setRequestMethod(METHOD_GET);
+			conn.setRequestMethod("GET");
 
-			conn.setRequestProperty("User-Agent",USER_AGENT);
+			conn.setRequestProperty("User-Agent", USER_AGENT);
 			if (requestHead != null && requestHead.size() > 0) {
 				for (Entry<String, String> en : requestHead.entrySet()) {
 					conn.setRequestProperty(en.getKey(), en.getValue());
@@ -35,15 +38,15 @@ public class HttpUtil {
 			conn.setUseCaches(false);
 			conn.setDoOutput(false);
 
-			in = new BufferedReader(new InputStreamReader(conn.getInputStream(),Constants.UTF8));
-			String response = read(in);
+			reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), Constants.UTF8));
+			String response = read(reader);
 			return response;
 		} catch (IOException e) {
 			throw e;
 		} finally {
 			try {
-				if (in != null)
-					in.close();
+				if (reader != null)
+					reader.close();
 				if (conn != null)
 					conn.disconnect();
 			} catch (IOException e) {
@@ -58,15 +61,15 @@ public class HttpUtil {
 	}
 
 	public static String post(String url, Map<String, String> requestHead, String requestBody) throws IOException {
-		PrintWriter out = null;
-		BufferedReader in = null;
+		PrintWriter writer = null;
+		BufferedReader reader = null;
 		HttpURLConnection conn = null;
 		try {
 			URL realUrl = new URL(url);
 			conn = (HttpURLConnection) realUrl.openConnection();
-			conn.setRequestMethod(METHOD_POST);
-			
-			conn.setRequestProperty("User-Agent",USER_AGENT);
+			conn.setRequestMethod("POST");
+
+			conn.setRequestProperty("User-Agent", USER_AGENT);
 			if (requestHead != null && requestHead.size() > 0) {
 				for (Entry<String, String> en : requestHead.entrySet()) {
 					conn.setRequestProperty(en.getKey(), en.getValue());
@@ -75,23 +78,23 @@ public class HttpUtil {
 			conn.setUseCaches(false);
 			conn.setDoOutput(true);
 
-			if (Assert.NotEmpty(requestBody)) {
-				out = new PrintWriter(conn.getOutputStream());
-				out.print(requestBody);
-				out.flush();
+			if (requestBody != null) {
+				writer = new PrintWriter(conn.getOutputStream());
+				writer.print(requestBody);
+				writer.flush();
 			}
-			
-			in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			String response = read(in);
+
+			reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			String response = read(reader);
 			return response;
 		} catch (IOException e) {
 			throw e;
 		} finally {
 			try {
-				if (out != null)
-					out.close();
-				if (in != null)
-					in.close();
+				if (writer != null)
+					writer.close();
+				if (reader != null)
+					reader.close();
 				if (conn != null)
 					conn.disconnect();
 			} catch (IOException e) {
@@ -103,7 +106,7 @@ public class HttpUtil {
 		StringBuilder sb = new StringBuilder();
 		String s = null;
 		while ((s = reader.readLine()) != null) {
-			sb.append(s + Constants.LINE_SEPARATOR);
+			sb.append(s + Constants.LINE_SEPARATOR);// 最后多了一个换行符
 		}
 		return sb.toString();
 	}

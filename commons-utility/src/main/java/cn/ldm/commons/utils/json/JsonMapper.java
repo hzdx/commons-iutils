@@ -1,4 +1,4 @@
-package cn.ldm.commons.json;
+package cn.ldm.commons.utils.json;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;

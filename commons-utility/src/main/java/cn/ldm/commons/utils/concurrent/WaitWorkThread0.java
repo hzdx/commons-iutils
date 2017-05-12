@@ -1,4 +1,4 @@
-package cn.ldm.commons.etc;
+package cn.ldm.commons.utils.concurrent;
 
 //使用synchronized实现
 public abstract class WaitWorkThread0 implements Runnable {
