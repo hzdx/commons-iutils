@@ -20,11 +20,11 @@ import cn.ldm.commons.utils.json.JsonpObject;
 public class BaseController {
 	protected Logger log = LoggerFactory.getLogger(getClass());
 
-//	@RequestMapping(value = "/hello")
-//	@ResponseBody
-//	public JsonResult hello(HttpServletRequest req) {
-//		return JsonResult.OK.message("获取请求成功！");
-//	}
+	// @RequestMapping(value = "/hello")
+	// @ResponseBody
+	// public JsonResult hello(HttpServletRequest req) {
+	// return JsonResult.OK.message("获取请求成功！");
+	// }
 
 	@InitBinder
 	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {

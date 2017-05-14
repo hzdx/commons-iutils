@@ -272,18 +272,15 @@ public abstract class BaseService<T> {
 		/**
 		 * insert操作
 		 */
-		insert,
-		/**
-		 * update操作
-		 */
-		update,
-		/**
-		 * 删除操作
-		 */
-		delete,
-		/**
-		 * 清空表格数据
-		 */
+		insert, /**
+				 * update操作
+				 */
+		update, /**
+				 * 删除操作
+				 */
+		delete, /**
+				 * 清空表格数据
+				 */
 		truncate;
 	}
 
@@ -315,26 +312,19 @@ public abstract class BaseService<T> {
 
 	/**
 	 * 分页查询样例
-	 *  @Transactional
-	 * public JsonResult list(TaskLog log) {
 	 * 
-	 * int count = super.selectOne("findCount", log);
-	 * if (count < 1) {
-	 * return JsonResult.OK.put("data", null);
-	 * }
-	 * log.setTotal(count);
-	 * if (log.getPageNo() < 1) {
-	 * log.setPageNo(1);
-	 * }
-	 * int totalPage = log.getTotalPage();
-	 * if (log.getPageNo() > log.getTotalPage()) {
-	 * log.setPageNo(totalPage);
-	 * }
-	 * List<TaskLog> logs = super.selectList("list", log);
-	 * return JsonResult.OK.put("data", logs).put("total",
-	 * count).put("totalPage", totalPage).put("pageNo",
-	 * log.getPageNo());
-	 * }
+	 * @Transactional public JsonResult list(TaskLog log) {
+	 * 
+	 *                int count = super.selectOne("findCount", log); if (count <
+	 *                1) { return JsonResult.OK.put("data", null); }
+	 *                log.setTotal(count); if (log.getPageNo() < 1) {
+	 *                log.setPageNo(1); } int totalPage = log.getTotalPage(); if
+	 *                (log.getPageNo() > log.getTotalPage()) {
+	 *                log.setPageNo(totalPage); } List<TaskLog> logs =
+	 *                super.selectList("list", log); return
+	 *                JsonResult.OK.put("data", logs).put("total",
+	 *                count).put("totalPage", totalPage).put("pageNo",
+	 *                log.getPageNo()); }
 	 */
-	
+
 }

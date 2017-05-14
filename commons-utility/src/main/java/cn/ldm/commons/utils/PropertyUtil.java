@@ -2,14 +2,18 @@ package cn.ldm.commons.utils;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
+
 public class PropertyUtil {
 
+	// PropertiesLoaderUtils.loadProperties(new
+	// ClassPathResource(propertiesFile));
 	public static Properties load(String propertiesFile) throws IOException {
 		InputStream resourceAsStream = Thread.currentThread().getContextClassLoader()
 				.getResourceAsStream(propertiesFile);
@@ -36,9 +40,9 @@ public class PropertyUtil {
 			throw new IllegalArgumentException("properties is null or empty!");
 		}
 
-		Map<String,String> map = new HashMap<>();
+		Map<String, String> map = new HashMap<>();
 		Set<String> keys = p.stringPropertyNames();
-		for(String key : keys){
+		for (String key : keys) {
 			map.put(key, p.getProperty(key));
 		}
 

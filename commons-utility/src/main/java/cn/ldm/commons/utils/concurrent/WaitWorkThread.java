@@ -11,8 +11,8 @@ public abstract class WaitWorkThread implements Runnable {
 	private String threadName;
 
 	private Lock lock = new ReentrantLock();
-	private Condition busy = lock.newCondition();//取数据条件
-	private Condition vacant = lock.newCondition();//delivery条件
+	private Condition busy = lock.newCondition();// 取数据条件
+	private Condition vacant = lock.newCondition();// delivery条件
 
 	public WaitWorkThread(String threadName) {
 		Thread thread = new Thread(this);
@@ -21,7 +21,6 @@ public abstract class WaitWorkThread implements Runnable {
 	}
 
 	public abstract void handler(Object data);
-	
 
 	protected void handerException(Throwable e) {
 		e.printStackTrace(System.err);
@@ -34,11 +33,10 @@ public abstract class WaitWorkThread implements Runnable {
 			try {
 				handler(data);
 			} catch (Throwable e) {
-				handerException(e);	
+				handerException(e);
 			}
 		}
 	}
-
 
 	private Object waitData() {
 		lock.lock();

@@ -4,13 +4,12 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target({java.lang.annotation.ElementType.METHOD})
+@Target({ java.lang.annotation.ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface EvictCache {
-    public abstract String key();
+	public abstract String key();
 
-    public abstract String namespace();
+	public abstract String namespace();
 
-    public abstract String type();
+	public abstract String type();
 }
-

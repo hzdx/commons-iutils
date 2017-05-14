@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+  default-autowire="byName" default-lazy-init="true">
+
+	<!-- httpclient spring配置 -->
+
+  <bean id="httpClient" factory-bean="httpClientBuilder" factory-method="build" />
+
+  <bean id="httpClientBuilder" class="org.apache.http.impl.client.HttpClientBuilder" factory-method="create">
+    <property name="maxConnTotal" value="1000" />
+    <property name="maxConnPerRoute" value="500" />
+    <property name="defaultSocketConfig">
+      <bean factory-bean="socketConfigBuilder" factory-method="build" />
+    </property>
+    <property name="defaultConnectionConfig">
+      <bean factory-bean="connectionConfigBuilder" factory-method="build" />
+    </property>
+    <property name="defaultRequestConfig">
+      <bean factory-bean="requestConfigBuilder" factory-method="build" />
+    </property>
+    <property name="SSLHostnameVerifier">
+      <util:constant static-field="org.apache.http.conn.ssl.NoopHostnameVerifier.INSTANCE" />
+    </property>
+  </bean>
+
+  <bean id="socketConfigBuilder" class="org.apache.http.config.SocketConfig" factory-method="custom">
+    <property name="soTimeout" value="10000" />
+    <property name="soReuseAddress" value="true" />
+    <property name="soLinger" value="1" />
+    <property name="soKeepAlive" value="true" />
+    <property name="tcpNoDelay" value="true" />
+  </bean>
+
+  <bean id="connectionConfigBuilder" class="org.apache.http.config.ConnectionConfig" factory-method="custom" />
+
+  <bean id="requestConfigBuilder" class="org.apache.http.client.config.RequestConfig" factory-method="custom">
+    <property name="connectionRequestTimeout" value="10000" />
+    <property name="connectTimeout" value="10000" />
+    <property name="socketTimeout" value="10000" />
+    <property name="redirectsEnabled" value="true" />
+    <property name="maxRedirects" value="10" />
+    <property name="relativeRedirectsAllowed" value="true" />
+    <property name="circularRedirectsAllowed" value="false" />
+    <property name="cookieSpec" value="best-match" />
+    <property name="expectContinueEnabled" value="false" />
+  </bean>
+
+</beans>

@@ -9,7 +9,8 @@ public class ThreadUtil {
 
 	public static void scheduleSingle(final String threadName, Runnable cmd, long initialDelay, long period,
 			TimeUnit unit) {
-		ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor(FixNameThreadFactory.name(threadName));
+		ScheduledExecutorService scheduler = Executors
+				.newSingleThreadScheduledExecutor(FixNameThreadFactory.name(threadName));
 		scheduler.scheduleAtFixedRate(cmd, initialDelay, period, unit);
 	}
 

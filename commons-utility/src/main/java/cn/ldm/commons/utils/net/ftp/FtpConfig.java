@@ -10,8 +10,9 @@ public class FtpConfig {
 	private String workDir;
 	private String targetFileName;
 
-	public FtpConfig(){}
-	
+	public FtpConfig() {
+	}
+
 	public FtpConfig(int idx, Properties prop) {
 		userName = prop.getProperty("ftp" + idx + ".userName");
 		password = prop.getProperty("ftp" + idx + ".password");
@@ -49,8 +50,8 @@ public class FtpConfig {
 	}
 
 	public void setPort(Integer port) {
-		
-		this.port = port == null ? 22 : port;//默认22端口
+
+		this.port = port == null ? 21 : port;// 默认21端口
 	}
 
 	public String getWorkDir() {
@@ -77,7 +78,5 @@ public class FtpConfig {
 				.append(", targetFileName=").append(targetFileName).append("}");
 		return builder.toString();
 	}
-
-	
 
 }

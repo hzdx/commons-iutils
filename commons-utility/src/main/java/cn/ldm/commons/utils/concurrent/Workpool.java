@@ -11,10 +11,10 @@ import org.slf4j.LoggerFactory;
 
 public class Workpool {
 	public static int defaultInitPoolSize = //
-			Integer.parseInt(System.getProperty("eastcom.threadPool.initSize", "16"));
+	Integer.parseInt(System.getProperty("eastcom.threadPool.initSize", "16"));
 
 	public static int defaultMaxPoolSize = //
-			Integer.parseInt(System.getProperty("eastcom.threadPool.maxSize", String.valueOf(2 * defaultInitPoolSize)));
+	Integer.parseInt(System.getProperty("eastcom.threadPool.maxSize", String.valueOf(2 * defaultInitPoolSize)));
 
 	private static String defaultThreadNamePrefix = "eastcom-workpool";
 

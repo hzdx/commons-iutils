@@ -16,7 +16,8 @@ public class JsonpHttpMessageConverter extends MappingJackson2HttpMessageConvert
 			JsonpObject jsonp = (JsonpObject) object;
 			OutputStream out = outputMessage.getBody();
 			String text = jsonp.getFunction() + "(" + this.objectMapper.writeValueAsString(jsonp.getJson()) + ")";
-			byte[] bytes = text.getBytes(outputMessage.getHeaders().getContentType().getCharSet());// 使用contentType中的编码
+			byte[] bytes = text.getBytes(outputMessage.getHeaders().getContentType().getCharSet());
+			// 使用contentType中的编码,或者写死为 UTF-8
 			out.write(bytes);
 		} else {
 			super.writeInternal(object, outputMessage);

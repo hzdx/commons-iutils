@@ -25,7 +25,7 @@ public class JettyLauncher {
 		webContext.setResourceBase(webappPath);
 		webContext.setClassLoader(Thread.currentThread().getContextClassLoader());
 
-		//禁用文件缓存？
+		// 禁用文件缓存？
 		webContext.setInitParameter("org.eclipse.jetty.servlet.Default.useFileMappedBuffer", "false");
 		webContext.setInitParameter("org.eclipse.jetty.servlet.Default.dirAllowed", "false");
 

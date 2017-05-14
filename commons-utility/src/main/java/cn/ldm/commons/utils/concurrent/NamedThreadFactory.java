@@ -13,7 +13,7 @@ public class NamedThreadFactory implements ThreadFactory {
 
 	@Override
 	public Thread newThread(Runnable r) {
-		Thread t = new Thread(r,namePrefix + "-" + seq.getAndIncrement());
+		Thread t = new Thread(r, namePrefix + "-" + seq.getAndIncrement());
 		t.setDaemon(false);
 		return t;
 	}

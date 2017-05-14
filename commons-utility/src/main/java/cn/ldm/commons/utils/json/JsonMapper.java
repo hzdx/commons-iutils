@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 //使用jackson作为json解析工具
 public class JsonMapper extends ObjectMapper {
-	
+
 	private static final long serialVersionUID = 7013632610452349752L;
 
 	public JsonMapper() {
@@ -24,7 +24,7 @@ public class JsonMapper extends ObjectMapper {
 		this.configure(MapperFeature.AUTO_DETECT_FIELDS, true);
 		this.configure(MapperFeature.AUTO_DETECT_SETTERS, true);
 		this.configure(MapperFeature.AUTO_DETECT_GETTERS, true);
-		
+
 		this.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
 
 		this.configure(MapperFeature.USE_ANNOTATIONS, true);

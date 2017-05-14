@@ -1,9 +1,11 @@
 package cn.ldm.commons.utils;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,11 +18,22 @@ public class FileUtil {
 
 	public static String getClasspathFileLocation(String path) throws IOException {
 		return getClasspathFile(path).getAbsolutePath().replace("\\", "/");
-		// windows目录以 '\' 分隔，转换为linux下的'/' 分隔.
+		// windows目录以 '\' 分隔，用replace转换为linux下的'/' 分隔.
 	}
 
 	public static File getClasspathFile(String path) throws IOException {
 		return ResourceUtils.getFile("classpath:" + path);
+	}
+
+	public static String readFile(String path) throws Exception {
+		BufferedReader reader = new BufferedReader(new FileReader(path));
+		StringBuffer sb = new StringBuffer();
+		String line = null;
+		while ((line = reader.readLine()) != null) {
+			sb.append(line);
+		}
+		reader.close();
+		return sb.toString();
 	}
 
 	public static String read(String path) throws IOException {

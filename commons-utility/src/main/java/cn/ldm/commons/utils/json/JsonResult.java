@@ -40,15 +40,15 @@ public class JsonResult extends HashMap<String, Object> {
 	public JsonResult message(String message) {
 		return put(MESSAGE, message);
 	}
-	
-	public static JsonResult ok(){
+
+	public static JsonResult ok() {
 		return new JsonResult(Status.OK);
 	}
-	
-	public static JsonResult fail(){
+
+	public static JsonResult fail() {
 		return new JsonResult(Status.FAIL);
 	}
-	
+
 	@Override
 	public Object clone() {
 		return super.clone();

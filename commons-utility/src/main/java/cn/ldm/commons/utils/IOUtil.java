@@ -61,7 +61,7 @@ public class IOUtil {
 			os.flush();
 		}
 	}
-	
+
 	public static byte[] readBytes(InputStream is) throws IOException {
 		return readBytes(is, 4096);
 	}
@@ -79,13 +79,14 @@ public class IOUtil {
 			int totalLen = bufSize;
 			int times = 2;// 要读几次
 			while (len >= bufSize) {
-				//System.out.println(Thread.currentThread().getName()+" method availbe:"+is.available());
-				if(is.available() <= 0){//应对上一次刚好读完,解决read的阻塞问题,但不准确,很多时候(一般在第一次read之前)有数据还会返回0	
+				// System.out.println(Thread.currentThread().getName()+" method
+				// availbe:"+is.available());
+				if (is.available() <= 0) {// 应对上一次刚好读完,解决read的阻塞问题,但不准确,很多时候(一般在第一次read之前)有数据还会返回0
 					break;
 				}
-				
+
 				total = Arrays.copyOf(total, bufSize * times);// 增加一倍容量,扩容
-					
+
 				len = is.read(buf);// 如果上一次刚好读完,会阻塞在这里.总的字节数是bufSize的整数倍,就会有这种情况
 				if (len > 0) {
 					totalLen += len;

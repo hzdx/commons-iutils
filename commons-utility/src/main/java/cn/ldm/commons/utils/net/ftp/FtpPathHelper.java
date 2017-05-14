@@ -21,7 +21,7 @@ public class FtpPathHelper {
 			return targetPath;
 
 		String connectString = targetPath.substring(0, len + 3 + slen);
-		//log.info("连接字符串[" + connectString + "]");
+		// log.info("连接字符串[" + connectString + "]");
 		return connectString;
 
 	}
@@ -30,7 +30,7 @@ public class FtpPathHelper {
 
 		String path = "ftp[passive:true]://ipms:IPms!23$@10.11.40.157/xdr/lte/lte_s1u/lte_s1u_email/20160412/17/105_201604121710_c_02.CSV";
 		System.out.println("path=" + parseConnectString(path));
-		//path=ftp[passive:true]://ipms:IPms!23$@10.11.40.157
+		// path=ftp[passive:true]://ipms:IPms!23$@10.11.40.157
 	}
 
 }

@@ -113,10 +113,6 @@ public class CompileAndPackTools {
 	}
 
 	public static void main(String[] args) throws IOException {
-		// String currentDir = "E:\\github\\casual\\Casual";
-		// String javaSourcePath = currentDir + "/src/main/java/";
-		// String javaClassPath = currentDir + "/classes";
-		// String targetPath = currentDir + "/target/MyProject.jar";
 
 		String javaSourcePath = "E:\\github\\hadoop\\hadoop\\src\\main\\java\\org\\apache\\hadoop\\hbase\\mapreduce\\TsvImporterPutMapper.java";
 		String javaClassPath = "D:/tmp/classes1";
